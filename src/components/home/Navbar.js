@@ -1,9 +1,9 @@
 import React from "react";
 
-const Navbar = ({onClick: handleClick}) => {
+const Navbar = () => {
     return (
         <nav>
-            <a aria-label="home link" href="./Home" onClick={handleClick}>Home</a>
+            <a aria-label="home link" href="./Home">Home</a>
         </nav>
     )
 }

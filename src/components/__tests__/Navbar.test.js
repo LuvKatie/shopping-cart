@@ -5,18 +5,16 @@ import userEvent from "@testing-library/user-event";
 import Navbar from "../home/Navbar";
 
 describe("Navbar component children", () => {
-    it("calls handleClick on click", async () => {
-        const onClickMock = jest.fn(e => {
-            e.preventDefault();
-        });
-        
-        const user = userEvent.setup();
-
-        render(<Navbar onClick={onClickMock} />);
+    it("Checks if the Home link is present in Navbar", () => {
+        render(<Navbar />);
+        const nav = screen.getByRole("navigation");
         const link = screen.getByRole("link", {name: "home link"});
+        expect(nav).toContainElement(link)
+    })
 
-        await user.click(link);
-
-        expect(onClickMock).toHaveBeenCalledTimes(1);
+    it("Checks for the correct path in Home link", () => {
+        render(<Navbar />);
+        const link = screen.getByRole("link", {name: "home link"});
+        expect(link).toHaveAttribute('href', './Home');
     })
 })
