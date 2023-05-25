@@ -5,16 +5,22 @@ import userEvent from "@testing-library/user-event";
 import Navbar from "../home/Navbar";
 
 describe("Navbar component children", () => {
-    it("Checks if the Home link is present in Navbar", () => {
+    it("Checks for appropriate links in Navbar", () => {
         render(<Navbar />);
         const nav = screen.getByRole("navigation");
-        const link = screen.getByRole("link", {name: "home link"});
-        expect(nav).toContainElement(link)
+        const home = screen.getByRole("link", {name: "home"});
+        const shop = screen.getByRole("link", {name: "shop"});
+        const cart = screen.getByRole("img", {name: "cart"});
+        expect(nav).toContainElement(home);
+        expect(nav).toContainElement(shop);
+        expect(nav).toContainElement(cart);
     })
 
-    it("Checks for the correct path in Home link", () => {
+    it("Checks for the correct paths for Navbar links", () => {
         render(<Navbar />);
-        const link = screen.getByRole("link", {name: "home link"});
-        expect(link).toHaveAttribute('href', './Home');
+        const home = screen.getByRole("link", {name: "home"});
+        const shop = screen.getByRole("link", {name: "shop"});
+        expect(home).toHaveAttribute("href", "./Home");
+        expect(shop).toHaveAttribute("href", "../shop/Shop");
     })
 })
