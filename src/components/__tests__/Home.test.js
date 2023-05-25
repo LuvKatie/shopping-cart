@@ -6,12 +6,12 @@ import Home from "../home/Home";
 
 describe("Home component", () => {
     
-    it("renders Navbar component within Home component", () => {
+    it("Renders Navbar component within Home component", () => {
         render(<Home />)
         expect(screen.getByRole("navigation")).toBeInTheDocument();
     })
 
-    it("renders Footer component within Home component", () => {
+    it("Renders Footer component within Home component", () => {
         render(<Home />)
         expect(screen.getByRole("contentinfo")).toBeInTheDocument();
     })

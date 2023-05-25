@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 import Navbar from "../home/Navbar";
 
 describe("Navbar component children", () => {
-    it("Checks for appropriate links in Navbar", () => {
+    it("Checks for appropriate elements in Navbar", () => {
         render(<Navbar />);
         const nav = screen.getByRole("navigation");
         const home = screen.getByRole("link", {name: "home"});
@@ -16,7 +16,7 @@ describe("Navbar component children", () => {
         expect(nav).toContainElement(cart);
     })
 
-    it("Checks for the correct paths for Navbar links", () => {
+    it("Checks for the correct paths for Navbar anchor links", () => {
         render(<Navbar />);
         const home = screen.getByRole("link", {name: "home"});
         const shop = screen.getByRole("link", {name: "shop"});
