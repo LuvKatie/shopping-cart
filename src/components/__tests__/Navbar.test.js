@@ -20,7 +20,7 @@ describe("Navbar component children", () => {
         render(<Navbar />);
         const home = screen.getByRole("link", {name: "home"});
         const shop = screen.getByRole("link", {name: "shop"});
-        expect(home).toHaveAttribute("href", "./Home");
-        expect(shop).toHaveAttribute("href", "../shop/Shop");
+        expect(home).toHaveAttribute("href", "/");
+        expect(shop).toHaveAttribute("href", "/shop");
     })
 })
