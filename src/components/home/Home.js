@@ -4,10 +4,10 @@ import Footer from "./Footer";
 
 const Home = () => {
     return (
-        <>
+        <main id="home-page">
             <Navbar />
             <Footer />
-        </>
+        </main>
     )
 }
 

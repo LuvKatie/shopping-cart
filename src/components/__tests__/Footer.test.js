@@ -1,8 +1,8 @@
 import React from "react";
 import {render, screen} from "@testing-library/react";
 import "@testing-library/jest-dom";
-import userEvent from "@testing-library/user-event";
 import Footer from "../home/Footer";
+// import userEvent from "@testing-library/user-event";
 
 describe("Footer component children", () => {
     it("Contains correct children element for Footer", () => {
