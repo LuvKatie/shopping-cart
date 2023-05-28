@@ -1,8 +1,7 @@
 import React from "react";
-import {render, screen} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Navbar from "../home/Navbar";
-// import userEvent from "@testing-library/user-event";
 
 describe("Navbar component children", () => {
     it("Checks for appropriate elements in Navbar", () => {
