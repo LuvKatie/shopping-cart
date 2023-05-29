@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 const Home = () => {
     return (
-        <main id="home-page">
-            <Navbar />
-            <Footer />
-        </main>
+            <main id="home-page">
+                <Navbar />
+                <Footer />
+            </main> 
     )
 }
 
