@@ -1,12 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "tailwindcss/tailwind.css";
 
 const Navbar = () => {
   return (
     <nav>
       <ul>
         <li>
-          <Link aria-label="home" to={"/"}>
+          <Link
+            aria-label="home"
+            to={"/"}
+            className="text-3xl font-bold underline"
+          >
             Home
           </Link>
         </li>
