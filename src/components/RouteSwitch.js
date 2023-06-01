@@ -2,14 +2,16 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Shop from "./shop/Shop";
 import Home from "./home/Home";
+import { AppLayout } from "./AppLayout";
 
 const RouteSwitch = () => {
   return (
     <>
       <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="*" element={<></>} />
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+        </Route>
       </Routes>
     </>
   );
