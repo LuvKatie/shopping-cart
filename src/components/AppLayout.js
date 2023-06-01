@@ -7,7 +7,7 @@ export const AppLayout = () => {
     <>
       <div
         id="app-container"
-        className="home-template grid min-h-full min-w-full"
+        className="home-template relative grid min-h-full min-w-full"
       >
         <Outlet />
         <Navbar />

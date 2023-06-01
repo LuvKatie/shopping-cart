@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer
       aria-label="footer"
-      className="footer-template col-start-1 col-end-3 row-start-2 row-end-3 grid"
+      className="footer-template z-10 col-start-1 col-end-3 row-start-2 row-end-3 grid bg-transparent"
     >
       <div className="ml-12 flex items-center">
         <Link aria-label="api-credit" to={"/"} className="text-xl">
