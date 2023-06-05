@@ -1,0 +1,6 @@
+.item-layout {
+    min-height: 95%;
+    min-width: 95%;
+    max-width: 95%;
+    grid-template: repeat(3, 1fr) / repeat(4, 1fr);
+}

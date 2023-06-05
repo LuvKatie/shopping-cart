@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "tailwindcss/tailwind.css";
 import cart from "../../images/cart.svg";
 
 const Navbar = () => {
