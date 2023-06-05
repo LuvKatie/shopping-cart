@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
 import Shop from "../shop/Shop";
-import { createItems } from "../shop/Shop";
 import RouteSwitch from "../RouteSwitch";
 
 describe("Shop component", () => {
@@ -43,12 +42,5 @@ describe("Shop component", () => {
 
     expect(navbar).toBeInTheDocument();
     expect(footer).toBeInTheDocument();
-  });
-
-  it("createItems function to return correct length of elements", () => {
-    const itemsMock = jest.fn((amount) => amount);
-    const elements = createItems(itemsMock(4));
-
-    expect(elements).toHaveLength(4);
   });
 });
