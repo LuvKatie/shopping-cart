@@ -19,7 +19,6 @@ const ItemContainers = () => {
     ];
 
     const weapons = await fetchWeapons();
-    console.log(weapons);
 
     const skinsArr = weapons.data[2].skins;
     const foundVandal = [];
@@ -33,7 +32,6 @@ const ItemContainers = () => {
           .toLowerCase();
         if (vandals.includes(skinName) && !foundVandal.includes(skinsArr[j])) {
           foundVandal.push(skinsArr[j]);
-          console.log(foundVandal);
         }
       }
     }
