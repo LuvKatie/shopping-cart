@@ -54,7 +54,9 @@ const ItemContainers = () => {
   }
 
   function handleHover(element) {
-    console.log(element.target);
+    const options = element.target.querySelector("#item-options");
+    options.classList.toggle("shown");
+    options.classList.toggle("hidden");
   }
 
   function createItems(amount) {
@@ -69,6 +71,9 @@ const ItemContainers = () => {
           onMouseLeave={(e) => handleHover(e)}
         >
           <img src="" alt="" id={i} className="w-9/12"></img>
+          <div data-testid="item-options" id="item-options" className="hidden">
+            <button aria-label="add-to-cart">Add to Cart</button>
+          </div>
         </div>
       );
       elements.push(item);
