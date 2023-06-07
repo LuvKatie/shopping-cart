@@ -73,9 +73,9 @@ export function createItems(amount) {
     const item = (
       <div
         key={i}
-        className="flex min-h-full min-w-full items-center justify-center border-2 border-solid border-gray-900"
+        className="flex min-h-full w-64 min-w-fit items-center justify-center border-2 border-solid border-gray-900"
       >
-        <img src="" alt="" id={i} className=""></img>
+        <img src="" alt="" id={i} className="w-9/12"></img>
       </div>
     );
     elements.push(item);
