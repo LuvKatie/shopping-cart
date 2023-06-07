@@ -27,7 +27,7 @@ describe("ItemContainers component", () => {
     expect(response.data[2].displayName).toEqual("Vandal");
   });
 
-  it("Hovering over an item will show 'Add to cart' button", () => {
+  it("Hovering over an item will show 'Add to cart' button", async () => {
     const user = userEvent.setup();
     render(
       <MemoryRouter>
@@ -39,7 +39,7 @@ describe("ItemContainers component", () => {
       name: "item-container",
     }).firstChild;
 
-    user.hover(item);
+    await user.hover(item);
     const button = screen.getAllByText("Add to Cart");
     expect(button[0]).toBeInTheDocument();
   });
