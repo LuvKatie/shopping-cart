@@ -29,7 +29,6 @@ describe("ItemContainers component", () => {
 
   it("Hovering over an item will show 'Add to cart' button", () => {
     const user = userEvent.setup();
-    const text = "Add to Cart";
     render(
       <MemoryRouter>
         <ItemContainers />
@@ -40,10 +39,8 @@ describe("ItemContainers component", () => {
       name: "item-container",
     }).firstChild;
 
-    const button = screen.getByRole("button", { name: "add-to-cart" });
-
     user.hover(item);
-    expect(button).toBeInTheDocument();
-    expect(text).toBeInTheDocument();
+    const button = screen.getAllByText("Add to Cart");
+    expect(button[0]).toBeInTheDocument();
   });
 });

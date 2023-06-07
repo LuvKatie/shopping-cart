@@ -55,8 +55,10 @@ const ItemContainers = () => {
 
   function handleHover(element) {
     const options = element.target.querySelector("#item-options");
-    options.classList.toggle("shown");
-    options.classList.toggle("hidden");
+    if (options) {
+      options.classList.toggle("shown");
+      options.classList.toggle("hidden");
+    }
   }
 
   function createItems(amount) {
