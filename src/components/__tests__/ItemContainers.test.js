@@ -6,6 +6,16 @@ import { MemoryRouter } from "react-router-dom";
 import ItemContainers from "../shop/ItemContainer";
 import { fetchWeapons } from "../shop/ItemContainer";
 
+const WEAPONS = {
+  data: [
+    { displayName: "areas" },
+    { displayName: "phantom" },
+    { displayName: "vandal" },
+  ],
+};
+
+const unmockedFetch = global.fetch; //eslint-disable-line
+
 describe("ItemContainers component", () => {
   it("ItemContainer component renders correct amount of children elements", () => {
     render(
@@ -21,10 +31,17 @@ describe("ItemContainers component", () => {
   });
 
   it("Our fetch gets called correctly on the Valorant API", async () => {
-    jest.mock("../shop/ItemContainer");
+    //eslint-disable-next-line
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve(WEAPONS),
+      })
+    );
     const response = await fetchWeapons();
 
-    expect(response.data[2].displayName).toEqual("Vandal");
+    expect(response.data[2].displayName).toEqual("vandal");
+
+    global.fetch = unmockedFetch; //eslint-disable-line
   });
 
   it("Hovering over an item will show 'Add to cart' button", async () => {
