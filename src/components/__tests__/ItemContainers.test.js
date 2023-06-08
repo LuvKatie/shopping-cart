@@ -43,12 +43,14 @@ describe("ItemContainers component", () => {
 
   it("Our fetch gets called correctly on the Valorant API", async () => {
     const response = await fetchWeapons();
+
+    //eslint-disable-next-line
+    expect(fetchMock).toHaveBeenCalled();
     //eslint-disable-next-line
     expect(fetchMock).toHaveBeenCalledWith(
       "https://valorant-api.com/v1/weapons",
       { mode: "cors" }
     );
-
     expect(response.data[2].displayName).toEqual("vandal");
   });
 
