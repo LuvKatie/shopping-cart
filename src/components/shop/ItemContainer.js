@@ -36,14 +36,6 @@ const ItemContainers = () => {
       }
     }
 
-    // for (let k = 0; k < images.length; k++) {
-    //   if (foundVandal[k].chromas[1] && foundVandal[k].chromas[1].fullRender) {
-    //     images[k].src = `${foundVandal[k].chromas[1].fullRender}`;
-    //   } else {
-    //     images[k].src = `${foundVandal[k].displayIcon}`;
-    //   }
-    // }
-
     for (let k = 0; k < images.length; k++) {
       if (foundVandal[k].fullRender) {
         images[k].src = `${foundVandal[k].chromas[1].fullRender}`;

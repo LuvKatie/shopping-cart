@@ -10,9 +10,18 @@ const WEAPONS = {
   data: [
     { displayName: "areas" },
     { displayName: "phantom" },
-    { displayName: "vandal" },
+    { displayName: "vandal", skins: [] },
   ],
 };
+
+beforeEach(() => {
+  //eslint-disable-next-line
+  fetchMock = jest.spyOn(global, "fetch").mockImplementation(() =>
+    Promise.resolve({
+      json: () => Promise.resolve(WEAPONS),
+    })
+  );
+});
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -33,15 +42,8 @@ describe("ItemContainers component", () => {
   });
 
   it("Our fetch gets called correctly on the Valorant API", async () => {
-    //eslint-disable-next-line
-    const fetchMock = jest.spyOn(global, "fetch").mockImplementation(() =>
-      Promise.resolve({
-        json: () => Promise.resolve(WEAPONS),
-      })
-    );
-
     const response = await fetchWeapons();
-
+    //eslint-disable-next-line
     expect(fetchMock).toHaveBeenCalledWith(
       "https://valorant-api.com/v1/weapons",
       { mode: "cors" }
