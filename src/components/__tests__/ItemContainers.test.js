@@ -14,7 +14,9 @@ const WEAPONS = {
   ],
 };
 
-const unmockedFetch = global.fetch; //eslint-disable-line
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 describe("ItemContainers component", () => {
   it("ItemContainer component renders correct amount of children elements", () => {
@@ -32,16 +34,20 @@ describe("ItemContainers component", () => {
 
   it("Our fetch gets called correctly on the Valorant API", async () => {
     //eslint-disable-next-line
-    global.fetch = jest.fn(() =>
+    const fetchMock = jest.spyOn(global, "fetch").mockImplementation(() =>
       Promise.resolve({
         json: () => Promise.resolve(WEAPONS),
       })
     );
+
     const response = await fetchWeapons();
 
-    expect(response.data[2].displayName).toEqual("vandal");
+    expect(fetchMock).toHaveBeenCalledWith(
+      "https://valorant-api.com/v1/weapons",
+      { mode: "cors" }
+    );
 
-    global.fetch = unmockedFetch; //eslint-disable-line
+    expect(response.data[2].displayName).toEqual("vandal");
   });
 
   it("Hovering over an item will show 'Add to cart' button", async () => {
