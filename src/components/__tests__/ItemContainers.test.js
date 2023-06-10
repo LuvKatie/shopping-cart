@@ -8,7 +8,7 @@ import { fetchWeapons } from "../shop/ItemContainer";
 
 const WEAPONS = {
   data: [
-    { displayName: "areas" },
+    { displayName: "ares" },
     { displayName: "phantom" },
     { displayName: "vandal", skins: [] },
   ],
