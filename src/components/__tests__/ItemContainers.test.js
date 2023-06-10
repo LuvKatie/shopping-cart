@@ -1,4 +1,5 @@
 import React from "react";
+import { act } from "react-test-renderer";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
@@ -15,6 +16,13 @@ const WEAPONS = {
 };
 
 beforeEach(() => {
+  act(() => {
+    render(
+      <MemoryRouter>
+        <ItemContainers />
+      </MemoryRouter>
+    );
+  });
   //eslint-disable-next-line
   fetchMock = jest.spyOn(global, "fetch").mockImplementation(() =>
     Promise.resolve({
@@ -29,11 +37,6 @@ afterEach(() => {
 
 describe("ItemContainers component", () => {
   it("ItemContainer component renders correct amount of children elements", () => {
-    render(
-      <MemoryRouter>
-        <ItemContainers />
-      </MemoryRouter>
-    );
     const itemContainer = screen.getByRole("region", {
       name: "item-container",
     });
@@ -56,11 +59,6 @@ describe("ItemContainers component", () => {
 
   it("Hovering over an item will show 'Add to cart' button", async () => {
     const user = userEvent.setup();
-    render(
-      <MemoryRouter>
-        <ItemContainers />
-      </MemoryRouter>
-    );
 
     const item = screen.getByRole("region", {
       name: "item-container",
