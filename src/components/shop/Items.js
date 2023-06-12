@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../styles/items.css";
 
 const Items = (props) => {
-  const { category } = props;
+  const { category, setCategory } = props;
   const [page, setPage] = useState(1);
   const [catalogue, setCatalogue] = useState({
     skins: [],
@@ -73,7 +73,6 @@ const Items = (props) => {
   function handleClick(e) {
     e.preventDefault();
     setPage(() => page + 1);
-    // setCategory("phantom");
   }
 
   function createItems(amount) {
@@ -102,14 +101,19 @@ const Items = (props) => {
   }
 
   useEffect(() => {
-    populateDisplay();
-  }, [catalogue]);
-
-  useEffect(() => {
+    console.log("Catalogue Effect");
     catalogueState();
+    populateDisplay();
   }, [category, page]);
 
-  return <>{createItems(catalogue.skins.length)}</>;
+  const L = catalogue.skins.length;
+
+  return (
+    <>
+      {console.log("Render")}
+      {createItems(L)}
+    </>
+  );
 };
 
 export async function fetchWeapons() {
