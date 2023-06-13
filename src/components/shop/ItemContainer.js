@@ -13,7 +13,7 @@ const ItemContainers = () => {
       className="item-layout grid gap-12 bg-white p-6"
     >
       <Items category={category} page={page} />
-      <PageSwitch page={page} setPage={setPage} />
+      <PageSwitch page={page} setPage={setPage} setCategory={setCategory} />
     </section>
   );
 };
