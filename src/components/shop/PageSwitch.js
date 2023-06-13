@@ -1,11 +1,11 @@
 import React from "react";
 
 const PageSwitch = (props) => {
-  const { setPage, page } = props;
+  const { setPage } = props;
 
   function handleClick(e) {
     e.preventDefault();
-    setPage(() => page + 1);
+    setPage((x) => x + 1);
   }
 
   return (
