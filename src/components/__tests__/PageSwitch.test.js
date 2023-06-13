@@ -15,13 +15,16 @@ describe("PageSwitch component", () => {
   it("Page state increments when clicking next page button", async () => {
     const user = userEvent.setup();
     const button = screen.getByTestId("next");
+    const images = await screen.findAllByRole("img");
+
+    expect(images[0].id).toBe("Immortalized Vandal");
 
     await act(async () => {
       await user.click(button);
     });
 
     await waitFor(async () => {
-      const images = await screen.findAllByRole("img");
+      expect(images[0].id).not.toBe("Immortalized Vandal");
       expect(images[0].id).toBe("Glitchpop Vandal");
     });
   });
