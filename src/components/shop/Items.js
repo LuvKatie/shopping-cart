@@ -70,7 +70,6 @@ const Items = (props) => {
       endItem = catalogue.weapon[catalogue.weapon.length - 1];
       for (let item of catalogue.skins) {
         if (item.displayName === endItem.displayName && endPage === false) {
-          console.log(endPage);
           setEndPage(true);
           return;
         }
