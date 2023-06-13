@@ -12,7 +12,7 @@ beforeEach(() => {
 });
 
 describe("PageSwitch component", () => {
-  it("Page state increments when clicking next page button", async () => {
+  it("Page renders next set of items relative to our current page", async () => {
     const user = userEvent.setup();
     const button = screen.getByTestId("next");
     const images = await screen.findAllByRole("img");
@@ -29,7 +29,7 @@ describe("PageSwitch component", () => {
     });
   });
 
-  it("Page state decrements when clicking prev page button", async () => {
+  it("Page renders previous set of items relative to our current page", async () => {
     const user = userEvent.setup();
     const images = await screen.findAllByRole("img");
 
