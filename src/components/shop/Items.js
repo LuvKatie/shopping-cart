@@ -72,7 +72,6 @@ const Items = (props) => {
 
   function createItems(amount) {
     const elements = [];
-
     for (let i = 0; i < amount; i++) {
       const item = (
         <div
@@ -94,17 +93,14 @@ const Items = (props) => {
   }
 
   useEffect(() => {
-    // console.log("Catalogue Effect");
     catalogueState();
-    populateDisplay();
   }, [category, page]);
 
-  return (
-    <>
-      {/* {console.log("Render")} */}
-      {createItems(catalogue.skins.length)}
-    </>
-  );
+  useEffect(() => {
+    populateDisplay();
+  });
+
+  return <>{createItems(catalogue.skins.length)}</>;
 };
 
 export async function fetchWeapons() {
