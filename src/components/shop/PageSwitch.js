@@ -10,10 +10,20 @@ const PageSwitch = (props) => {
 
   return (
     <>
-      <button id="next" aria-label="next-page" onClick={handleClick}>
+      <button
+        data-testid="next "
+        id="next"
+        aria-label="next-page"
+        onClick={handleClick}
+      >
         {"-->"}
       </button>
-      <button id="prev" aria-label="prev-page" onClick={handleClick}>
+      <button
+        data-testid="prev"
+        id="prev"
+        aria-label="prev-page"
+        onClick={handleClick}
+      >
         {"<--"}
       </button>
     </>
