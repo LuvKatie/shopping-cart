@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import "../../styles/items.css";
 
 const Items = (props) => {
-  const { category, page } = props;
+  const { category, page, endPage, setEndPage } = props;
   const [catalogue, setCatalogue] = useState({
     skins: [],
     page: page,
+    weapon: [],
   });
 
   async function populateDisplay() {
@@ -24,8 +25,9 @@ const Items = (props) => {
 
   async function catalogueState() {
     const skins = await getItems(category, page);
+    const weapons = await getWeapon(category);
 
-    setCatalogue({ skins: skins, page: page });
+    setCatalogue({ skins: skins, page: page, weapon: weapons });
   }
 
   async function getItems(name, page) {
@@ -51,6 +53,33 @@ const Items = (props) => {
       }
     }
     return skins;
+  }
+
+  async function getWeapon(name) {
+    const weapons = await fetchWeapons();
+    for (let item of weapons.data) {
+      if (item.displayName.toLowerCase() === name.toLowerCase()) {
+        return item.skins;
+      }
+    }
+  }
+
+  async function checkEndPage() {
+    let endItem;
+    if (catalogue.weapon.length > 0) {
+      endItem = catalogue.weapon[catalogue.weapon.length - 1];
+      for (let item of catalogue.skins) {
+        if (item.displayName === endItem.displayName && endPage === false) {
+          console.log(endPage);
+          setEndPage(true);
+          return;
+        }
+      }
+      const names = catalogue.skins.map((item) => item.displayName);
+      if (!names.includes(endItem.displayName) && endPage === true) {
+        setEndPage(false);
+      }
+    }
   }
 
   function handleHover(e) {
@@ -98,6 +127,7 @@ const Items = (props) => {
 
   useEffect(() => {
     populateDisplay();
+    checkEndPage();
   });
 
   return <>{createItems(catalogue.skins.length)}</>;

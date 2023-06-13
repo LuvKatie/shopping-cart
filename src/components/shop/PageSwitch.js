@@ -1,7 +1,7 @@
 import React from "react";
 
 const PageSwitch = (props) => {
-  const { setPage } = props;
+  const { setPage, page, endPage } = props;
 
   function handleClick(e) {
     e.preventDefault();
@@ -23,14 +23,16 @@ const PageSwitch = (props) => {
       >
         {"-->"}
       </button>
-      <button
-        data-testid="prev"
-        id="prev"
-        aria-label="prev-page"
-        onClick={handleClick}
-      >
-        {"<--"}
-      </button>
+      {page > 1 && (
+        <button
+          data-testid="prev"
+          id="prev"
+          aria-label="prev-page"
+          onClick={handleClick}
+        >
+          {"<--"}
+        </button>
+      )}
     </>
   );
 };
