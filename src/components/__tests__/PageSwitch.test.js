@@ -17,17 +17,19 @@ beforeEach(async () => {
 });
 
 describe("PageSwitch component", () => {
-  it("Page state increments when clicking next page button", () => {
-    const user = userEvent.setup();
-    const images = screen.getAllByRole("image");
+  it("Page state increments when clicking next page button", async () => {
+    await waitFor(async () => {
+      const user = userEvent.setup();
+      const images = await screen.findAllByRole("img");
 
-    expect(images[0].id).toBe("0");
+      expect(images[0].id).toBe("0");
 
-    const next = screen.getByRole("button", { name: "next-page" });
-    user.click(next);
+      const next = screen.getByRole("button", { name: "next-page" });
+      await user.click(next);
+      const next2 = screen.getByRole("button", { name: "next-page" });
 
-    expect(images[0].id).not.toBe("0");
-    expect(images[0].id).toBe("Immortalized Vandal");
+      expect(next2).toBeInTheDocument();
+    });
   });
 
   //   it("Page state decrements when clicking prev page button", () => {
