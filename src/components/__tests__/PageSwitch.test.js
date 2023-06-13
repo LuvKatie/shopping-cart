@@ -3,31 +3,26 @@ import { act } from "react-dom/test-utils";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import { MemoryRouter } from "react-router-dom";
-import ItemContainers from "../shop/ItemContainer";
+import Shop from "../shop/Shop";
 
 beforeEach(() => {
   act(() => {
-    render(
-      <MemoryRouter>
-        <ItemContainers />
-      </MemoryRouter>
-    );
+    render(<Shop />);
   });
 });
 
 describe("PageSwitch component", () => {
-  it.skip("Page state increments when clicking next page button", async () => {
+  it("Page state increments when clicking next page button", async () => {
     const user = userEvent.setup();
+    const button = screen.getByTestId("next");
 
     await act(async () => {
-      await user.click(screen.getByTestId("prev"));
+      await user.click(button);
     });
 
-    const images = await screen.findAllByRole("img");
-
-    await waitFor(() => {
-      expect(images[0].id).toBe("Immortalized Vandal");
+    await waitFor(async () => {
+      const images = await screen.findAllByRole("img");
+      expect(images[0].id).toBe("Glitchpop Vandal");
     });
   });
 
