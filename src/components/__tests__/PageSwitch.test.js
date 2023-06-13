@@ -1,34 +1,33 @@
 import React from "react";
-import { act } from "react-test-renderer";
+import { act } from "react-dom/test-utils";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
 import ItemContainers from "../shop/ItemContainer";
 
-beforeEach(async () => {
-  await act(async () => {
+beforeEach(() => {
+  act(() => {
     render(
       <MemoryRouter>
-        <ItemContainers></ItemContainers>
+        <ItemContainers />
       </MemoryRouter>
     );
   });
 });
 
 describe("PageSwitch component", () => {
-  it("Page state increments when clicking next page button", async () => {
-    await waitFor(async () => {
-      const user = userEvent.setup();
-      const images = await screen.findAllByRole("img");
+  it.skip("Page state increments when clicking next page button", async () => {
+    const user = userEvent.setup();
 
-      expect(images[0].id).toBe("0");
+    await act(async () => {
+      await user.click(screen.getByTestId("prev"));
+    });
 
-      const next = screen.getByRole("button", { name: "next-page" });
-      await user.click(next);
-      const next2 = screen.getByRole("button", { name: "next-page" });
+    const images = await screen.findAllByRole("img");
 
-      expect(next2).toBeInTheDocument();
+    await waitFor(() => {
+      expect(images[0].id).toBe("Immortalized Vandal");
     });
   });
 

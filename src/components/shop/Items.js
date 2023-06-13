@@ -36,7 +36,6 @@ const Items = (props) => {
     for (let item of weapons.data) {
       if (item.displayName.toLowerCase() === name.toLowerCase()) {
         for (let i = end - 12; i < end; i++) {
-          console.log(i);
           if (!item.skins[i]) {
             continue;
           }
@@ -95,14 +94,14 @@ const Items = (props) => {
   }
 
   useEffect(() => {
-    console.log("Catalogue Effect");
+    // console.log("Catalogue Effect");
     catalogueState();
     populateDisplay();
   }, [category, page]);
 
   return (
     <>
-      {console.log("Render")}
+      {/* {console.log("Render")} */}
       {createItems(catalogue.skins.length)}
     </>
   );
