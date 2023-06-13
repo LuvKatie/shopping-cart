@@ -15,14 +15,16 @@ const PageSwitch = (props) => {
 
   return (
     <>
-      <button
-        data-testid="next "
-        id="next"
-        aria-label="next-page"
-        onClick={handleClick}
-      >
-        {"-->"}
-      </button>
+      {!endPage && (
+        <button
+          data-testid="next "
+          id="next"
+          aria-label="next-page"
+          onClick={handleClick}
+        >
+          {"-->"}
+        </button>
+      )}
       {page > 1 && (
         <button
           data-testid="prev"
