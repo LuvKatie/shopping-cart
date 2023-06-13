@@ -29,17 +29,30 @@ describe("PageSwitch component", () => {
     });
   });
 
-  //   it("Page state decrements when clicking prev page button", () => {
-  //     const user = userEvent.setup();
-  //     const images = screen.getAllByRole("image");
-  //     // First load
-  //     expect(images[0].id).toBe("0");
+  it("Page state decrements when clicking prev page button", async () => {
+    const user = userEvent.setup();
+    const images = await screen.findAllByRole("img");
 
-  //     const prev = screen.getByRole("button", { name: "prev-page" });
-  //     const next = screen.getByRole("button", { name: "next-page" });
+    expect(images[0].id).toBe("Immortalized Vandal");
 
-  //     user.click(next);
-  //     expect(images[0].id).not.toBe("0");
-  //     expect(images[0].id).toBe("Immortalized Vandal");
-  //   });
+    const next = screen.getByRole("button", { name: "next-page" });
+    await act(async () => {
+      await user.click(next);
+    });
+
+    await waitFor(async () => {
+      expect(images[0].id).not.toBe("Immortalized Vandal");
+      expect(images[0].id).toBe("Glitchpop Vandal");
+    });
+
+    const prev = screen.getByRole("button", { name: "prev-page" });
+    await act(async () => {
+      await user.click(prev);
+    });
+
+    await waitFor(async () => {
+      expect(images[0].id).not.toBe("Glitchpop Vandal");
+      expect(images[0].id).toBe("Immortalized Vandal");
+    });
+  });
 });

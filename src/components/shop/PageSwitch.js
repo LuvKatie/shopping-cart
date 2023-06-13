@@ -5,7 +5,12 @@ const PageSwitch = (props) => {
 
   function handleClick(e) {
     e.preventDefault();
-    setPage((x) => x + 1);
+    if (e.target.id === "next") {
+      setPage((x) => x + 1);
+      return;
+    }
+
+    setPage((x) => x - 1);
   }
 
   return (
