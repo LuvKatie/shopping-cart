@@ -36,6 +36,7 @@ const Items = (props) => {
     for (let item of weapons.data) {
       if (item.displayName.toLowerCase() === name.toLowerCase()) {
         for (let i = end - 12; i < end; i++) {
+          console.log(i);
           if (!item.skins[i]) {
             continue;
           }
@@ -70,11 +71,6 @@ const Items = (props) => {
     }
   }
 
-  // function handleClick(e) {
-  //   e.preventDefault();
-  //   setPage(() => page + 1);
-  // }
-
   function createItems(amount) {
     const elements = [];
 
@@ -104,12 +100,10 @@ const Items = (props) => {
     populateDisplay();
   }, [category, page]);
 
-  const L = catalogue.skins.length;
-
   return (
     <>
       {console.log("Render")}
-      {createItems(L)}
+      {createItems(catalogue.skins.length)}
     </>
   );
 };

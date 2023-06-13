@@ -22,7 +22,7 @@ describe("ItemContainers component", () => {
     });
 
     await waitFor(() => {
-      expect(itemContainer.childNodes).toHaveLength(12);
+      expect(itemContainer.childNodes).toHaveLength(14);
     });
   });
 });
