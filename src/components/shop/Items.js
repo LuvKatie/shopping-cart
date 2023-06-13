@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../styles/items.css";
 
 const Items = (props) => {
-  const { category, setCategory } = props;
-  const [page, setPage] = useState(1);
+  const { category, page } = props;
   const [catalogue, setCatalogue] = useState({
     skins: [],
     page: page,
@@ -14,6 +13,7 @@ const Items = (props) => {
     if (catalogue.skins.length > 0 && images[0]) {
       for (let k = 0; k < catalogue.skins.length; k++) {
         if (catalogue.skins[k].chromas) {
+          images[k].id = `${catalogue.skins[k].displayName}`;
           images[k].src = `${catalogue.skins[k].chromas[0].fullRender}`;
         } else {
           images[k].src = `${catalogue.skins[k].displayIcon}`;
@@ -70,10 +70,10 @@ const Items = (props) => {
     }
   }
 
-  function handleClick(e) {
-    e.preventDefault();
-    setPage(() => page + 1);
-  }
+  // function handleClick(e) {
+  //   e.preventDefault();
+  //   setPage(() => page + 1);
+  // }
 
   function createItems(amount) {
     const elements = [];
@@ -88,9 +88,7 @@ const Items = (props) => {
         >
           <img src="" alt="" id={i} className="w-9/12"></img>
           <div data-testid="item-options" className="item-options hidden">
-            <button aria-label="add-to-cart" onClick={handleClick}>
-              Add to Cart
-            </button>
+            <button aria-label="add-to-cart">Add to Cart</button>
           </div>
         </div>
       );
