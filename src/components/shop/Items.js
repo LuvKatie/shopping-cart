@@ -30,31 +30,6 @@ const Items = (props) => {
     setCatalogue({ skins: skins, page: page, weapon: weapons });
   }
 
-  async function getItems(name, page) {
-    const weapons = await fetchWeapons();
-    let end = page * 12;
-    let skins = [];
-
-    for (let item of weapons.data) {
-      if (item.displayName.toLowerCase() === name.toLowerCase()) {
-        for (let i = end - 12; i < end; i++) {
-          if (!item.skins[i]) {
-            continue;
-          }
-
-          if (item.skins[i].displayName !== "Random Favorite Skin") {
-            skins.push(item.skins[i]);
-          } else {
-            end = end + 1;
-            i++;
-            skins.push(item.skins[i]);
-          }
-        }
-      }
-    }
-    return skins;
-  }
-
   async function getWeapon(name) {
     const weapons = await fetchWeapons();
     for (let item of weapons.data) {
@@ -139,6 +114,31 @@ export async function fetchWeapons() {
   const weapons = await response.json();
 
   return weapons;
+}
+
+async function getItems(name, page) {
+  const weapons = await fetchWeapons();
+  let end = page * 12;
+  let skins = [];
+
+  for (let item of weapons.data) {
+    if (item.displayName.toLowerCase() === name.toLowerCase()) {
+      for (let i = end - 12; i < end; i++) {
+        if (!item.skins[i]) {
+          continue;
+        }
+
+        if (item.skins[i].displayName !== "Random Favorite Skin") {
+          skins.push(item.skins[i]);
+        } else {
+          end = end + 1;
+          i++;
+          skins.push(item.skins[i]);
+        }
+      }
+    }
+  }
+  return skins;
 }
 
 export default Items;
