@@ -1,6 +1,6 @@
 import React from "react";
 import { act } from "react-test-renderer";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
 import Shop from "../shop/Shop";
@@ -22,11 +22,5 @@ describe("ItemContainers component", () => {
     });
 
     expect(itemContainer).toBeInTheDocument();
-
-    // const children = await screen.findAllByRole("img");
-
-    // await waitFor(() => {
-    //   expect(children).toHaveLength(12);
-    // });
   });
 });

@@ -14,3 +14,15 @@ beforeEach(async () => {
     );
   });
 });
+
+describe("Categories component", () => {
+  it("Categories component loads upon landing on Shop", async () => {
+    const children = await screen.findAllByRole("img");
+    const firstChild = screen.getByRole("img", { name: "vandal-category" });
+
+    await waitFor(() => {
+      expect(children).toHaveLength(4);
+      expect(firstChild).toBeInTheDocument();
+    });
+  });
+});
