@@ -4,7 +4,11 @@ import "../../styles/items.css";
 
 const Items = (props) => {
   const page = useContext(PageContext);
+<<<<<<< HEAD
   const { category, endPage, setEndPage } = props;
+=======
+  const { category, endPage, setEndPage, layoutChange } = props;
+>>>>>>> category-selection
   const [catalogue, setCatalogue] = useState({
     skins: [],
     page: page,
@@ -33,6 +37,13 @@ const Items = (props) => {
   }
 
   useEffect(() => {
+<<<<<<< HEAD
+=======
+    layoutChange("items");
+  }, []);
+
+  useEffect(() => {
+>>>>>>> category-selection
     catalogueState();
   }, [category, page]);
 
@@ -49,7 +60,10 @@ export async function fetchWeapons() {
     mode: "cors",
   });
   const weapons = await response.json();
+<<<<<<< HEAD
 
+=======
+>>>>>>> category-selection
   return weapons;
 }
 
