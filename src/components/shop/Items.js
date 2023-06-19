@@ -4,7 +4,7 @@ import "../../styles/items.css";
 
 const Items = (props) => {
   const page = useContext(PageContext);
-  const { category, endPage, setEndPage } = props;
+  const { category, endPage, setEndPage, layoutChange } = props;
   const [catalogue, setCatalogue] = useState({
     skins: [],
     page: page,
@@ -33,10 +33,7 @@ const Items = (props) => {
   }
 
   useEffect(() => {
-    const itemContainer = document.getElementById("item-container");
-    itemContainer.classList.contains("item-layout")
-      ? null
-      : itemContainer.classList.add("item-layout");
+    layoutChange("items");
   }, []);
 
   useEffect(() => {
@@ -56,7 +53,6 @@ export async function fetchWeapons() {
     mode: "cors",
   });
   const weapons = await response.json();
-
   return weapons;
 }
 

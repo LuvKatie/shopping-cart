@@ -23,6 +23,11 @@ beforeEach(async () => {
       </MemoryRouter>
     );
   });
+
+  const user = userEvent.setup();
+  const vandal = screen.getByRole("img", { name: "vandal-category" });
+  await user.click(vandal);
+
   //eslint-disable-next-line
   fetchMock = jest.spyOn(global, "fetch").mockImplementation(() =>
     Promise.resolve({

@@ -5,10 +5,14 @@ import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import Shop from "../shop/Shop";
 
-beforeEach(() => {
+beforeEach(async () => {
   act(() => {
     render(<Shop />);
   });
+
+  const user = userEvent.setup();
+  const vandal = screen.getByRole("img", { name: "vandal-category" });
+  await user.click(vandal);
 });
 
 describe("PageSwitch component", () => {
