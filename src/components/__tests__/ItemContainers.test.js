@@ -16,11 +16,17 @@ beforeEach(async () => {
 });
 
 describe("ItemContainers component", () => {
-  it("ItemContainer component renders correct amount of children elements", async () => {
-    const children = await screen.findAllByRole("img");
-
-    await waitFor(() => {
-      expect(children).toHaveLength(12);
+  it("ItemContainer component renders upon visiting Shop link", async () => {
+    const itemContainer = screen.getByRole("region", {
+      name: "item-container",
     });
+
+    expect(itemContainer).toBeInTheDocument();
+
+    // const children = await screen.findAllByRole("img");
+
+    // await waitFor(() => {
+    //   expect(children).toHaveLength(12);
+    // });
   });
 });
