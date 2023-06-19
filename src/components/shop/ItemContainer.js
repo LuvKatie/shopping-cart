@@ -13,7 +13,8 @@ const ItemContainers = () => {
     <PageContext.Provider value={page}>
       <section
         aria-label="item-container"
-        className="item-layout grid gap-12 bg-white p-6"
+        className="grid gap-12 bg-white p-6"
+        id="item-container"
       >
         <Items category={category} endPage={endPage} setEndPage={setEndPage} />
         <PageSwitch

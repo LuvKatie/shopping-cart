@@ -33,6 +33,13 @@ const Items = (props) => {
   }
 
   useEffect(() => {
+    const itemContainer = document.getElementById("item-container");
+    itemContainer.classList.contains("item-layout")
+      ? null
+      : itemContainer.classList.add("item-layout");
+  }, []);
+
+  useEffect(() => {
     catalogueState();
   }, [category, page]);
 
