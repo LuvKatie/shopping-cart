@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { PageContext } from "./ItemContainer";
 
 const PageSwitch = (props) => {
-  const { setPage, page, endPage } = props;
+  const page = useContext(PageContext);
+  const { setPage, endPage } = props;
 
   function handleClick(e) {
     e.preventDefault();

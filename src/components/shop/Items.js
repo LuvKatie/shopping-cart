@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { PageContext } from "./ItemContainer";
 import "../../styles/items.css";
 
 const Items = (props) => {
-  const { category, page, endPage, setEndPage } = props;
+  const page = useContext(PageContext);
+  const { category, endPage, setEndPage } = props;
   const [catalogue, setCatalogue] = useState({
     skins: [],
     page: page,
@@ -30,78 +32,13 @@ const Items = (props) => {
     setCatalogue({ skins: skins, page: page, weapon: weapons });
   }
 
-  async function getWeapon(name) {
-    const weapons = await fetchWeapons();
-    for (let item of weapons.data) {
-      if (item.displayName.toLowerCase() === name.toLowerCase()) {
-        return item.skins;
-      }
-    }
-  }
-
-  async function checkEndPage() {
-    let endItem;
-    if (catalogue.weapon.length > 0) {
-      endItem = catalogue.weapon[catalogue.weapon.length - 1];
-      for (let item of catalogue.skins) {
-        if (item.displayName === endItem.displayName && endPage === false) {
-          setEndPage(true);
-          return;
-        }
-      }
-      const names = catalogue.skins.map((item) => item.displayName);
-      if (!names.includes(endItem.displayName) && endPage === true) {
-        setEndPage(false);
-      }
-    }
-  }
-
-  function handleHover(e) {
-    const options = document.querySelectorAll(".item-options");
-    const target = e.target.querySelector(".item-options");
-
-    if (target) {
-      target.classList.toggle("shown");
-      target.classList.toggle("hidden");
-    }
-
-    for (let element of options) {
-      if (element !== target && element.classList.contains("shown")) {
-        element.classList.toggle("shown");
-        element.classList.toggle("hidden");
-      }
-    }
-  }
-
-  function createItems(amount) {
-    const elements = [];
-    for (let i = 0; i < amount; i++) {
-      const item = (
-        <div
-          key={i}
-          className="item flex min-h-full w-64 min-w-fit items-center justify-center border-2 border-solid border-gray-900"
-          onMouseEnter={(e) => handleHover(e)}
-          onMouseLeave={(e) => handleHover(e)}
-        >
-          <img src="" alt="" id={i} className="w-9/12"></img>
-          <div data-testid="item-options" className="item-options hidden">
-            <button aria-label="add-to-cart">Add to Cart</button>
-          </div>
-        </div>
-      );
-      elements.push(item);
-    }
-
-    return elements;
-  }
-
   useEffect(() => {
     catalogueState();
   }, [category, page]);
 
   useEffect(() => {
     populateDisplay();
-    checkEndPage();
+    checkEndPage(catalogue, endPage, setEndPage);
   });
 
   return <>{createItems(catalogue.skins.length)}</>;
@@ -114,6 +51,32 @@ export async function fetchWeapons() {
   const weapons = await response.json();
 
   return weapons;
+}
+
+async function checkEndPage(catalogue, endPage, setEndPage) {
+  let endItem;
+  if (catalogue.weapon.length > 0) {
+    endItem = catalogue.weapon[catalogue.weapon.length - 1];
+    for (let item of catalogue.skins) {
+      if (item.displayName === endItem.displayName && endPage === false) {
+        setEndPage(true);
+        return;
+      }
+    }
+    const names = catalogue.skins.map((item) => item.displayName);
+    if (!names.includes(endItem.displayName) && endPage === true) {
+      setEndPage(false);
+    }
+  }
+}
+
+async function getWeapon(name) {
+  const weapons = await fetchWeapons();
+  for (let item of weapons.data) {
+    if (item.displayName.toLowerCase() === name.toLowerCase()) {
+      return item.skins;
+    }
+  }
 }
 
 async function getItems(name, page) {
@@ -139,6 +102,45 @@ async function getItems(name, page) {
     }
   }
   return skins;
+}
+
+function handleHover(e) {
+  const options = document.querySelectorAll(".item-options");
+  const target = e.target.querySelector(".item-options");
+
+  if (target) {
+    target.classList.toggle("shown");
+    target.classList.toggle("hidden");
+  }
+
+  for (let element of options) {
+    if (element !== target && element.classList.contains("shown")) {
+      element.classList.toggle("shown");
+      element.classList.toggle("hidden");
+    }
+  }
+}
+
+function createItems(amount) {
+  const elements = [];
+  for (let i = 0; i < amount; i++) {
+    const item = (
+      <div
+        key={i}
+        className="item flex min-h-full w-64 min-w-fit items-center justify-center border-2 border-solid border-gray-900"
+        onMouseEnter={(e) => handleHover(e)}
+        onMouseLeave={(e) => handleHover(e)}
+      >
+        <img src="" alt="" id={i} className="w-9/12"></img>
+        <div data-testid="item-options" className="item-options hidden">
+          <button aria-label="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+    );
+    elements.push(item);
+  }
+
+  return elements;
 }
 
 export default Items;
