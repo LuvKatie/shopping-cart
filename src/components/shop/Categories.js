@@ -18,12 +18,14 @@ const Categories = (props) => {
         <img
           aria-label="knife-category"
           src="https://media.valorant-api.com/weaponskins/c5482640-4652-6948-29c6-769e8198db27/displayicon.png"
+          onClick={() => handleClick("melee")}
         ></img>
       </div>
       <div className="category-item classic-category">
         <img
           aria-label="classic-category"
           src="https://media.valorant-api.com/weaponskinchromas/bb1e1703-4ea1-9be5-c145-4480a6b9f0d7/fullrender.png"
+          onClick={() => handleClick("classic")}
         ></img>
       </div>
       <div className="category-item phantom-category">

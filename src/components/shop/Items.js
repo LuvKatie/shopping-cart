@@ -130,11 +130,11 @@ function createItems(amount) {
     const item = (
       <div
         key={i}
-        className="item flex min-h-full w-64 min-w-fit items-center justify-center border-2 border-solid border-gray-900"
+        className="item flex h-full w-full items-center justify-center border-2 border-solid border-gray-900"
         onMouseEnter={(e) => handleHover(e)}
         onMouseLeave={(e) => handleHover(e)}
       >
-        <img src="" alt="" id={i} className="w-9/12"></img>
+        <img src="" alt="" id={i} className="h-32 w-9/12 object-contain"></img>
         <div data-testid="item-options" className="item-options hidden">
           <button aria-label="add-to-cart">Add to Cart</button>
         </div>
