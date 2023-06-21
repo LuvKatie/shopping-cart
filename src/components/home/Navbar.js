@@ -4,7 +4,7 @@ import cart from "../../images/cart.svg";
 
 const Navbar = () => {
   return (
-    <nav className="z-10 col-start-2 col-end-3 row-start-1 row-end-1 flex items-center justify-center bg-transparent text-center">
+    <nav className="z-10 col-start-2 col-end-3 row-start-1 row-end-1 flex items-center justify-center bg-transparent text-center text-white">
       <ul>
         <li className="pb-4">
           <Link aria-label="home" to={"/"} className="text-2xl">
@@ -21,7 +21,7 @@ const Navbar = () => {
             src={cart}
             aria-label="cart"
             alt="a shopping cart"
-            className="h-16 w-16"
+            className="icon-color h-16 w-16"
           ></img>
         </li>
       </ul>

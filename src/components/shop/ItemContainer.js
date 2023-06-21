@@ -29,7 +29,7 @@ const ItemContainers = () => {
     <PageContext.Provider value={page}>
       <section
         aria-label="item-container"
-        className="h-4/5 w-4/5 gap-12 bg-white p-6"
+        className="h-4/5 w-4/5 gap-12 bg-transparent p-6"
         id="item-container"
       >
         {selectCategory && (

@@ -6,7 +6,7 @@ const Shop = () => {
   return (
     <div
       data-testid="shop-page"
-      className="flex items-center justify-center bg-red-400"
+      className="flex items-center justify-center bg-black bg-opacity-25"
     >
       <ItemContainers />
     </div>
