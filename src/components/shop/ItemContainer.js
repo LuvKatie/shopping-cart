@@ -6,7 +6,7 @@ import Categories from "./Categories";
 export const PageContext = createContext();
 
 const ItemContainers = () => {
-  const [category, setCategory] = useState("vandal");
+  const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
   const [endPage, setEndPage] = useState(false);
   const [selectCategory, setSelectCategory] = useState(true);
@@ -36,6 +36,7 @@ const ItemContainers = () => {
           <Categories
             layoutChange={layoutChange}
             setSelectCategory={setSelectCategory}
+            setCategory={setCategory}
           />
         )}
         {!selectCategory && (

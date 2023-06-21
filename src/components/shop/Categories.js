@@ -1,11 +1,16 @@
 import React, { useEffect } from "react";
 
 const Categories = (props) => {
-  const { layoutChange, setSelectCategory } = props;
+  const { layoutChange, setSelectCategory, setCategory } = props;
 
   useEffect(() => {
     layoutChange("categories");
   }, []);
+
+  function handleClick(category) {
+    setSelectCategory(false);
+    setCategory(`${category}`);
+  }
 
   return (
     <div id="category-container">
@@ -25,11 +30,12 @@ const Categories = (props) => {
         <img
           aria-label="phantom-category"
           src="https://media.valorant-api.com/weaponskinchromas/6f9c7109-485a-f2a3-cb1d-9f9a31a995d7/fullrender.png"
+          onClick={() => handleClick("phantom")}
         ></img>
       </div>
       <div
         className="category-item vandal-category"
-        onClick={() => setSelectCategory(false)}
+        onClick={() => handleClick("vandal")}
       >
         <img
           aria-label="vandal-category"
