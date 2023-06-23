@@ -1,0 +1,10 @@
+.shop-background {
+    background-color: #eb2936;
+    opacity: 0.9;
+}
+
+.shop-page {
+    background-image: url("../images/shopvalorant.jpg");
+    background-position: center;
+    background-size: contain;
+}

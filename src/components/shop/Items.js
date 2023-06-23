@@ -84,12 +84,12 @@ async function getWeapon(name) {
 
 async function getItems(name, page) {
   const weapons = await fetchWeapons();
-  let end = page * 12;
+  let end = page * 6;
   let skins = [];
 
   for (let item of weapons.data) {
     if (item.displayName.toLowerCase() === name.toLowerCase()) {
-      for (let i = end - 12; i < end; i++) {
+      for (let i = end - 6; i < end; i++) {
         if (!item.skins[i]) {
           continue;
         }
@@ -130,7 +130,7 @@ function createItems(amount) {
     const item = (
       <div
         key={i}
-        className="item flex h-full w-full items-center justify-center border-2 border-solid border-gray-900"
+        className="item flex h-full w-full items-center justify-center bg-black bg-opacity-90"
         onMouseEnter={(e) => handleHover(e)}
         onMouseLeave={(e) => handleHover(e)}
       >

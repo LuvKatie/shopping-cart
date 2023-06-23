@@ -1,3 +1,7 @@
+* {
+    font-family: Tungsten-Bold,arial,georgia,sans-serif;
+}
+
 #root {
     margin: 0;
     height: 100vh;
