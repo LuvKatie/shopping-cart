@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import cart from "../../images/cart.svg";
 import "../../styles/shop.css";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [showHome, setShowHome] = useState(false);
+  const { handleClick } = props;
+
   return (
     <nav className="z-10 col-start-2 col-end-3 row-start-1 row-end-1 flex items-center justify-center bg-transparent text-center text-white">
       <ul>
@@ -38,6 +40,7 @@ const Navbar = () => {
             aria-label="cart"
             alt="a shopping cart"
             className="icon-color h-16 w-16"
+            onClick={handleClick}
           ></img>
         </li>
       </ul>

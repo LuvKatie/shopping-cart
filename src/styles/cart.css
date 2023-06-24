@@ -1,0 +1,27 @@
+.show {
+    display: inline-block;
+    position: absolute;
+    background-color: white;
+
+    left: 70vw;
+
+    width: 30vw;
+    height: 100vh;
+    z-index: 12;
+
+    animation: open 1.5s;
+}
+
+.hide {
+    display: none;
+    visibility: none;
+}
+
+@keyframes open {
+    0% {
+        left: 100vw;
+    }
+    100% {
+        left: 70vw;
+    }
+}
