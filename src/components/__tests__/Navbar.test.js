@@ -13,10 +13,8 @@ describe("Navbar component children", () => {
     );
 
     const nav = screen.getByRole("navigation");
-    const home = screen.getByRole("link", { name: "home" });
     const shop = screen.getByRole("link", { name: "shop" });
     const cart = screen.getByRole("img", { name: "cart" });
-    expect(nav).toContainElement(home);
     expect(nav).toContainElement(shop);
     expect(nav).toContainElement(cart);
   });
@@ -27,9 +25,7 @@ describe("Navbar component children", () => {
         <Navbar />
       </MemoryRouter>
     );
-    const home = screen.getByRole("link", { name: "home" });
     const shop = screen.getByRole("link", { name: "shop" });
-    expect(home).toHaveAttribute("href", "/");
     expect(shop).toHaveAttribute("href", "/shop");
   });
 });

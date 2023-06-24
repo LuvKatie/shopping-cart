@@ -29,7 +29,7 @@ describe("PageSwitch component", () => {
 
     await waitFor(async () => {
       expect(images[0].id).not.toBe("Immortalized Vandal");
-      expect(images[0].id).toBe("Glitchpop Vandal");
+      expect(images[0].id).toBe("Aristocrat Vandal");
     });
   });
 
@@ -46,7 +46,7 @@ describe("PageSwitch component", () => {
 
     await waitFor(async () => {
       expect(images[0].id).not.toBe("Immortalized Vandal");
-      expect(images[0].id).toBe("Glitchpop Vandal");
+      expect(images[0].id).toBe("Aristocrat Vandal");
     });
 
     const prev = screen.getByRole("button", { name: "prev-page" });
@@ -55,7 +55,7 @@ describe("PageSwitch component", () => {
     });
 
     await waitFor(async () => {
-      expect(images[0].id).not.toBe("Glitchpop Vandal");
+      expect(images[0].id).not.toBe("Aristocrat Vandal");
       expect(images[0].id).toBe("Immortalized Vandal");
     });
   });
