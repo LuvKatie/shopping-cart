@@ -16,7 +16,11 @@ const Cart = (props) => {
 
   return (
     <div data-testid="cart-modal" className={`${modalMode()}`}>
-      <button onClick={handleClick} className="h-12 w-12 bg-gray-500">
+      <button
+        aria-label="modal-exit"
+        onClick={handleClick}
+        className="h-12 w-12 bg-gray-500"
+      >
         X
       </button>
     </div>

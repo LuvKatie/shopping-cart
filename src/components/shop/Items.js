@@ -137,6 +137,44 @@ function createItems(amount) {
         <img src="" alt="" id={i} className="h-32 w-9/12 object-contain"></img>
         <div data-testid="item-options" className="item-options hidden">
           <button aria-label="add-to-cart">Add to Cart</button>
+          <div id="quantity-container" className="flex items-center">
+            <button
+              aria-label="decrement-amount"
+              className="decrement amount-btn text-xl"
+              onClick={(e) => {
+                const input = e.target.parentNode.querySelector("#item-amount");
+                const value = Number(input.value);
+                if (value > 0) {
+                  input.value = value - 1;
+                }
+              }}
+            >
+              -
+            </button>
+            <input
+              type="number"
+              className="quantity h-10 w-16 text-center text-xl"
+              id="item-amount"
+              aria-label="item-amount"
+              name="item-amount"
+              min={0}
+              max={427}
+              defaultValue={0}
+            ></input>
+            <button
+              aria-label="increment-amount"
+              className="increment amount-btn text-xl"
+              onClick={(e) => {
+                const input = e.target.parentNode.querySelector("#item-amount");
+                const value = Number(input.value);
+                if (value >= 0) {
+                  input.value = value + 1;
+                }
+              }}
+            >
+              +
+            </button>
+          </div>
         </div>
       </div>
     );

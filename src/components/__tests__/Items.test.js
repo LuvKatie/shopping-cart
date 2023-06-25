@@ -16,7 +16,7 @@ const WEAPONS = {
 };
 
 beforeEach(async () => {
-  await act(async () => {
+  act(() => {
     render(
       <MemoryRouter>
         <ItemContainers></ItemContainers>
@@ -25,15 +25,13 @@ beforeEach(async () => {
   });
 
   const user = userEvent.setup();
-  const vandal = screen.getByRole("img", { name: "vandal-category" });
-  await user.click(vandal);
 
-  //eslint-disable-next-line
-  fetchMock = jest.spyOn(global, "fetch").mockImplementation(() =>
-    Promise.resolve({
-      json: () => Promise.resolve(WEAPONS),
-    })
-  );
+  await waitFor(async () => {
+    const vandal = screen.getByTestId("vandal-category");
+    await user.click(vandal);
+    const item = await screen.findAllByTestId("item-options");
+    await user.hover(item[0]);
+  });
 });
 
 afterEach(() => {
@@ -42,6 +40,12 @@ afterEach(() => {
 
 describe("Items component", () => {
   it("Our fetch gets called correctly on the Valorant API", async () => {
+    //eslint-disable-next-line
+    fetchMock = jest.spyOn(global, "fetch").mockImplementation(() =>
+      Promise.resolve({
+        json: () => Promise.resolve(WEAPONS),
+      })
+    );
     const response = await fetchWeapons();
 
     //eslint-disable-next-line
@@ -55,16 +59,39 @@ describe("Items component", () => {
   });
 
   it("Hovering over an item will show 'Add to cart' button", async () => {
+    const button = await screen.findAllByText("Add to Cart");
+
     await waitFor(async () => {
-      const user = userEvent.setup();
-
-      const item = screen.getByRole("region", {
-        name: "item-container",
-      }).firstChild;
-
-      await user.hover(item);
-      const button = screen.getAllByText("Add to Cart");
       expect(button[0]).toBeInTheDocument();
+    });
+  });
+
+  it("Hovering over an item will show buttons to increment and decrement", async () => {
+    const increment = await screen.findAllByLabelText("increment-amount");
+    const decrement = await screen.findAllByLabelText("decrement-amount");
+
+    await waitFor(async () => {
+      expect(increment[0]).toBeInTheDocument();
+      expect(decrement[0]).toBeInTheDocument();
+    });
+  });
+
+  it("Clicking increment or decrement increases or decreases quantity", async () => {
+    const user = userEvent.setup();
+    const increment = await screen.findAllByLabelText("increment-amount");
+    const decrement = await screen.findAllByLabelText("decrement-amount");
+    const input = await screen.findAllByLabelText("item-amount");
+
+    await user.click(increment[0]);
+
+    waitFor(() => {
+      expect(input).toHaveValue(1);
+    });
+
+    await user.click(decrement[0]);
+
+    waitFor(() => {
+      expect(input).toHaveValue(0);
     });
   });
 });

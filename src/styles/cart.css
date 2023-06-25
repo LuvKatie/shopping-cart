@@ -9,7 +9,7 @@
     height: 100vh;
     z-index: 12;
 
-    animation: open 1.5s;
+    animation: open 1s;
 }
 
 .hide {
