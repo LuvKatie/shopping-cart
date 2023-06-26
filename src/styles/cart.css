@@ -1,5 +1,72 @@
-.show {
-    display: inline-block;
+/* width */
+::-webkit-scrollbar {
+    width: 18px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #ff81f9;
+    border-radius: 20px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:active {
+    background: #555;
+}
+#cart-modal {
+    display: grid;
+    grid-template: 1fr 8fr 1fr / 1fr;
+}
+
+#cart-exit {
+    margin: 12px;
+    width: 1.5vw;
+    height: 1.5vw;
+    border-bottom: 4px solid black;
+    border-right: 4px solid black;
+    transform: rotate(135deg);
+}
+
+#cart-exit:hover {
+    border-bottom: 4px solid red;
+    border-right: 4px solid red;
+}
+
+#cart-header {
+    grid-row: 1 / 2;
+}
+
+#cart-items {
+    margin: 20px 10px;
+    grid-row: 2 / 3;
+    grid-auto-rows: 100px;
+}
+
+#cart-checkout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 3 / -1;
+}
+
+#cart-checkout-button {
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    width: 200px;
+    height: 50px;
+    background-color: rgb(46, 204, 113)
+}
+
+#cart-checkout-button:hover {
+    color: rgb(0, 0, 0);
+    background-color: rgb(247, 220, 111)
+}
+
+.show-cart-modal {
     position: absolute;
     background-color: white;
 
@@ -8,13 +75,13 @@
     width: 30vw;
     height: 100vh;
     z-index: 12;
-
+    overflow-y: auto;
     animation: open 1s;
 }
 
-.hide {
+.hide-cart-modal,
+.hide-cart-modal * {
     display: none;
-    visibility: none;
 }
 
 @keyframes open {

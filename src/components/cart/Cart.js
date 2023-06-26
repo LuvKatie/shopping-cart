@@ -11,25 +11,31 @@ const Cart = (props) => {
 
   function modalMode() {
     if (toggleCart) {
-      return "show";
+      return "show-cart-modal";
     }
 
-    return "hide";
+    return "hide-cart-modal";
   }
 
   useEffect(() => {}, [cartItems]);
 
   return (
     <div data-testid="cart-modal" className={`${modalMode()}`} id="cart-modal">
-      {/* {cartItems.map((item) => item)} */}
-      {cartItems}
-      <button
-        aria-label="modal-exit"
-        onClick={handleClick}
-        className="h-12 w-12 bg-gray-500"
-      >
-        X
-      </button>
+      <header aria-label="cart-header" id="cart-header">
+        <button
+          aria-label="modal-exit"
+          onClick={handleClick}
+          id="cart-exit"
+        ></button>
+      </header>
+      <main data-testid="cart-items" className="grid" id="cart-items">
+        {cartItems}
+      </main>
+      <div data-testid="cart-checkout" id="cart-checkout-container">
+        <button aria-label="cart-checkout-button" id="cart-checkout-button">
+          Checkout
+        </button>
+      </div>
     </div>
   );
 };
