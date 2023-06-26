@@ -1,0 +1,9 @@
+#cart-icon:hover,
+#shop:hover,
+#home:hover {
+    transform: scale(1.1)
+}
+
+#cart-icon:hover {
+    cursor: pointer;
+}

@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import { PageContext } from "./ItemContainer";
+import { CartItemsContext, SetCartItemsContext } from "../RouteSwitch";
 import "../../styles/items.css";
 
 const Items = (props) => {
   const page = useContext(PageContext);
+  const cartItems = useContext(CartItemsContext);
+  const setCartItems = useContext(SetCartItemsContext);
   const { category, endPage, setEndPage, layoutChange } = props;
   const [catalogue, setCatalogue] = useState({
     skins: [],
@@ -30,6 +33,92 @@ const Items = (props) => {
     const weapons = await getWeapon(category);
 
     setCatalogue({ skins: skins, page: page, weapon: weapons });
+  }
+
+  function addToCart(e) {
+    const image = e.target.parentNode.parentNode.querySelector("img").src;
+    const newItem = (
+      <div className="H" key={`item-${cartItems.length}`}>
+        HELLO
+      </div>
+    );
+    console.log(newItem);
+
+    setCartItems((prev) => (prev.length > 0 ? [...prev, newItem] : [newItem]));
+    console.log(cartItems);
+    console.log(image);
+  }
+
+  function createItems(amount) {
+    const elements = [];
+    for (let i = 0; i < amount; i++) {
+      const item = (
+        <div
+          key={i}
+          className="item flex h-full w-full items-center justify-center bg-black bg-opacity-90"
+          onMouseEnter={(e) => handleHover(e)}
+          onMouseLeave={(e) => handleHover(e)}
+        >
+          <img
+            src=""
+            alt=""
+            id={i}
+            className="h-32 w-9/12 object-contain"
+          ></img>
+          <div data-testid="item-options" className="item-options hidden">
+            <button
+              aria-label="add-to-cart"
+              className="add-cart"
+              onClick={addToCart}
+            >
+              Add To Cart
+            </button>
+            <div id="quantity-container" className="flex items-center">
+              <button
+                aria-label="decrement-amount"
+                className="decrement amount-btn text-xl"
+                onClick={(e) => {
+                  const input =
+                    e.target.parentNode.querySelector("#item-amount");
+                  const value = Number(input.value);
+                  if (value > 0) {
+                    input.value = value - 1;
+                  }
+                }}
+              >
+                -
+              </button>
+              <input
+                type="number"
+                className="quantity h-10 w-16 text-center text-xl"
+                id="item-amount"
+                aria-label="item-amount"
+                name="item-amount"
+                min={0}
+                max={427}
+                defaultValue={0}
+              ></input>
+              <button
+                aria-label="increment-amount"
+                className="increment amount-btn text-xl"
+                onClick={(e) => {
+                  const input =
+                    e.target.parentNode.querySelector("#item-amount");
+                  const value = Number(input.value);
+                  if (value >= 0) {
+                    input.value = value + 1;
+                  }
+                }}
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+      elements.push(item);
+    }
+    return elements;
   }
 
   useEffect(() => {
@@ -122,68 +211,6 @@ function handleHover(e) {
       element.classList.toggle("hidden");
     }
   }
-}
-
-function createItems(amount) {
-  const elements = [];
-  for (let i = 0; i < amount; i++) {
-    const item = (
-      <div
-        key={i}
-        className="item flex h-full w-full items-center justify-center bg-black bg-opacity-90"
-        onMouseEnter={(e) => handleHover(e)}
-        onMouseLeave={(e) => handleHover(e)}
-      >
-        <img src="" alt="" id={i} className="h-32 w-9/12 object-contain"></img>
-        <div data-testid="item-options" className="item-options hidden">
-          <button aria-label="add-to-cart" className="add-cart">
-            Add To Cart
-          </button>
-          <div id="quantity-container" className="flex items-center">
-            <button
-              aria-label="decrement-amount"
-              className="decrement amount-btn text-xl"
-              onClick={(e) => {
-                const input = e.target.parentNode.querySelector("#item-amount");
-                const value = Number(input.value);
-                if (value > 0) {
-                  input.value = value - 1;
-                }
-              }}
-            >
-              -
-            </button>
-            <input
-              type="number"
-              className="quantity h-10 w-16 text-center text-xl"
-              id="item-amount"
-              aria-label="item-amount"
-              name="item-amount"
-              min={0}
-              max={427}
-              defaultValue={0}
-            ></input>
-            <button
-              aria-label="increment-amount"
-              className="increment amount-btn text-xl"
-              onClick={(e) => {
-                const input = e.target.parentNode.querySelector("#item-amount");
-                const value = Number(input.value);
-                if (value >= 0) {
-                  input.value = value + 1;
-                }
-              }}
-            >
-              +
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-    elements.push(item);
-  }
-
-  return elements;
 }
 
 export default Items;

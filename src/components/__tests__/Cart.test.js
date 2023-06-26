@@ -1,14 +1,14 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { act } from "react-test-renderer";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
 // import Cart from "../cart/Cart";
 import Navbar from "../home/Navbar";
 import { AppLayout } from "../AppLayout";
+import RouteSwitch from "../RouteSwitch";
 import userEvent from "@testing-library/user-event";
 // import { act } from "react-test-renderer";
-
-beforeEach(() => {});
 
 afterEach(() => {
   jest.restoreAllMocks;
@@ -56,5 +56,29 @@ describe("Cart component", () => {
     const exit = screen.getByRole("button", { name: "modal-exit" });
 
     expect(exit).toBeInTheDocument();
+  });
+
+  it("Cart component can store items which user adds to it", async () => {
+    const user = userEvent.setup();
+    act(() => {
+      render(
+        <MemoryRouter initialEntries={["/shop"]}>
+          <RouteSwitch />
+        </MemoryRouter>
+      );
+    });
+    await waitFor(async () => {
+      const category = screen.getByTestId("vandal-category");
+      await user.click(category);
+    });
+    const button = await screen.findAllByText(/add to cart/i);
+    const modal = screen.getByTestId("cart-modal");
+    const modalItems = screen.getByTestId("cart-items");
+
+    await waitFor(() => {
+      expect(button[0]).toBeInTheDocument();
+      expect(modal).toBeInTheDocument();
+      expect(modalItems.firstChild).toBeInTheDocument();
+    });
   });
 });

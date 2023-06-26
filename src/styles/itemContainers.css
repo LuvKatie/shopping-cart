@@ -50,7 +50,7 @@
 }
 
 #next span {
-    animation: animate-right 2.5s infinite;
+    animation: animate-right 2s infinite;
     animation-iteration-count: 2;
     transform: rotate(-45deg);
 }

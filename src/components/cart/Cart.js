@@ -1,8 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ToggleCartContext } from "../AppLayout";
+import { CartItemsContext } from "../RouteSwitch";
 import "../../styles/cart.css";
 
 const Cart = (props) => {
+  const cartItems = useContext(CartItemsContext);
+  // const setCartItems = useContext(SetCartItemsContext);
   const toggleCart = useContext(ToggleCartContext);
   const { handleClick } = props;
 
@@ -14,8 +17,11 @@ const Cart = (props) => {
     return "hide";
   }
 
+  useEffect(() => {}, [cartItems]);
+
   return (
-    <div data-testid="cart-modal" className={`${modalMode()}`}>
+    <div data-testid="cart-modal" className={`${modalMode()}`} id="cart-modal">
+      {cartItems.map((item) => item)}
       <button
         aria-label="modal-exit"
         onClick={handleClick}
