@@ -24,7 +24,9 @@ const PageSwitch = (props) => {
           aria-label="next-page"
           onClick={handleClick}
         >
-          {"-->"}
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       )}
       {page > 1 && (
@@ -34,7 +36,9 @@ const PageSwitch = (props) => {
           aria-label="prev-page"
           onClick={handleClick}
         >
-          {"<--"}
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       )}
     </>

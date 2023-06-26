@@ -59,7 +59,7 @@ describe("Items component", () => {
   });
 
   it("Hovering over an item will show 'Add to cart' button", async () => {
-    const button = await screen.findAllByText("Add to Cart");
+    const button = await screen.findAllByText(/add to cart/i);
 
     await waitFor(async () => {
       expect(button[0]).toBeInTheDocument();

@@ -13,6 +13,7 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
+
 .amount-btn {
     height: 2.5rem;
     width: 3rem;
@@ -24,9 +25,36 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .item-options {
+    display: grid;
+    justify-items: center;
+    align-items: center;
     position: absolute;
-    background-color: lightblue;
+    background-color: rgba(100, 100, 100, 0.3);
 }
+
+#quantity-container {
+    margin-bottom: 100px;
+}
+
+.add-cart {
+    color: black;
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    border-radius: 4px;
+    border: 1px solid white;
+
+    grid-row: 2 / 3;
+
+    width: 140px;
+    height: 50px;
+    background-color: rgb(255, 255, 255, 0.8);
+}
+
+.add-cart:hover {
+    background-color: rgb(255, 255, 255, 1);
+}
+
 
 .shown {
     width: 100%;

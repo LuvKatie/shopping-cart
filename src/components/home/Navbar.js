@@ -1,39 +1,34 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import cart from "../../images/cart.svg";
-import "../../styles/shop.css";
+import "../../styles/navbar.css";
 
 const Navbar = (props) => {
-  const [showHome, setShowHome] = useState(false);
   const { handleClick } = props;
+  const location = useLocation();
 
   return (
     <nav className="z-10 col-start-2 col-end-3 row-start-1 row-end-1 flex items-center justify-center bg-transparent text-center text-white">
       <ul>
-        {showHome && (
-          <li className="pb-4">
-            <Link
-              aria-label="home"
-              to={"/"}
-              className="text-3xl"
-              onClick={() => setShowHome(false)}
-            >
-              Home
-            </Link>
-          </li>
-        )}
-        {!showHome && (
-          <li className="pb-4">
-            <Link
-              aria-label="shop"
-              to={"/shop"}
-              className="text-3xl"
-              onClick={() => setShowHome(true)}
-            >
-              Shop
-            </Link>
-          </li>
-        )}
+        <li className="pb-4">
+          <Link aria-label="home" to={"/"} className="text-3xl">
+            Home
+          </Link>
+        </li>
+        <li className="pb-4">
+          <Link
+            aria-label="shop"
+            to={"/shop"}
+            className="text-3xl"
+            onClick={() => {
+              if (location.pathname === "/shop") {
+                window.location.reload();
+              }
+            }}
+          >
+            Shop
+          </Link>
+        </li>
         <li className="flex justify-center">
           <img
             src={cart}

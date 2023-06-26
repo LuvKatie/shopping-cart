@@ -136,7 +136,9 @@ function createItems(amount) {
       >
         <img src="" alt="" id={i} className="h-32 w-9/12 object-contain"></img>
         <div data-testid="item-options" className="item-options hidden">
-          <button aria-label="add-to-cart">Add to Cart</button>
+          <button aria-label="add-to-cart" className="add-cart">
+            Add To Cart
+          </button>
           <div id="quantity-container" className="flex items-center">
             <button
               aria-label="decrement-amount"
