@@ -3,14 +3,17 @@ import { act } from "react-test-renderer";
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
+import ContextProvider from "../ContextProvider";
 import { MemoryRouter } from "react-router-dom";
 import Shop from "../shop/Shop";
 
-beforeEach(async () => {
-  await act(async () => {
+beforeEach(() => {
+  act(() => {
     render(
       <MemoryRouter>
-        <Shop />
+        <ContextProvider>
+          <Shop />
+        </ContextProvider>
       </MemoryRouter>
     );
   });

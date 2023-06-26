@@ -3,12 +3,11 @@ import { act } from "react-test-renderer";
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
-// import Cart from "../cart/Cart";
+import ContextProvider from "../ContextProvider";
 import Navbar from "../home/Navbar";
 import { AppLayout } from "../AppLayout";
 import RouteSwitch from "../RouteSwitch";
 import userEvent from "@testing-library/user-event";
-// import { act } from "react-test-renderer";
 
 afterEach(() => {
   jest.restoreAllMocks;
@@ -35,7 +34,9 @@ describe("Cart component", () => {
     const user = userEvent.setup();
     render(
       <MemoryRouter>
-        <AppLayout />
+        <ContextProvider>
+          <AppLayout />
+        </ContextProvider>
       </MemoryRouter>
     );
 
@@ -44,13 +45,15 @@ describe("Cart component", () => {
 
     const modal = screen.getByTestId("cart-modal");
 
-    expect(modal).toHaveClass("show");
+    expect(modal).toHaveClass("show-cart-modal");
   });
 
   it("Detect exit button for Cart modal", () => {
     render(
       <MemoryRouter>
-        <AppLayout />
+        <ContextProvider>
+          <AppLayout />
+        </ContextProvider>
       </MemoryRouter>
     );
     const exit = screen.getByRole("button", { name: "modal-exit" });
@@ -58,12 +61,14 @@ describe("Cart component", () => {
     expect(exit).toBeInTheDocument();
   });
 
-  it("Cart component can store items which user adds to it", async () => {
+  it("User can append item to cart modal via add to cart button", async () => {
     const user = userEvent.setup();
     act(() => {
       render(
         <MemoryRouter initialEntries={["/shop"]}>
-          <RouteSwitch />
+          <ContextProvider>
+            <RouteSwitch />
+          </ContextProvider>
         </MemoryRouter>
       );
     });
@@ -72,6 +77,7 @@ describe("Cart component", () => {
       await user.click(category);
     });
     const button = await screen.findAllByText(/add to cart/i);
+    await user.click(button[0]);
     const modal = screen.getByTestId("cart-modal");
     const modalItems = screen.getByTestId("cart-items");
 

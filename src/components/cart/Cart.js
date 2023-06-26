@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { ToggleCartContext } from "../AppLayout";
-import { CartItemsContext } from "../RouteSwitch";
+import { ShopContext } from "../ContextProvider";
 import "../../styles/cart.css";
 
 const Cart = (props) => {
-  const cartItems = useContext(CartItemsContext);
-  // const setCartItems = useContext(SetCartItemsContext);
+  const { cartItems, setCartItems } = useContext(ShopContext);
   const toggleCart = useContext(ToggleCartContext);
   const { handleClick } = props;
+  console.log(setCartItems);
+  console.log(cartItems);
 
   function modalMode() {
     if (toggleCart) {
@@ -21,16 +22,16 @@ const Cart = (props) => {
 
   return (
     <div data-testid="cart-modal" className={`${modalMode()}`} id="cart-modal">
-      <header aria-label="cart-header" id="cart-header">
+      <div aria-label="cart-header" id="cart-header">
         <button
           aria-label="modal-exit"
           onClick={handleClick}
           id="cart-exit"
         ></button>
-      </header>
-      <main data-testid="cart-items" className="grid" id="cart-items">
+      </div>
+      <div data-testid="cart-items" className="grid" id="cart-items">
         {cartItems}
-      </main>
+      </div>
       <div data-testid="cart-checkout" id="cart-checkout-container">
         <button aria-label="cart-checkout-button" id="cart-checkout-button">
           Checkout

@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { PageContext } from "./ItemContainer";
-import { CartItemsContext, SetCartItemsContext } from "../RouteSwitch";
+import { ShopContext } from "../ContextProvider";
 import "../../styles/items.css";
 
 const Items = (props) => {
   const page = useContext(PageContext);
-  const cartItems = useContext(CartItemsContext);
-  const setCartItems = useContext(SetCartItemsContext);
+  const { cartItems, setCartItems } = useContext(ShopContext);
   const { category, endPage, setEndPage, layoutChange } = props;
   const [catalogue, setCatalogue] = useState({
     skins: [],
@@ -37,16 +36,14 @@ const Items = (props) => {
 
   function addToCart(e) {
     const image = e.target.parentNode.parentNode.querySelector("img").src;
+    console.log(image);
     const newItem = (
       <div className="H" key={`item-${cartItems.length}`}>
         HELLO
       </div>
     );
-    console.log(newItem);
 
     setCartItems((prev) => (prev.length > 0 ? [...prev, newItem] : [newItem]));
-    console.log(cartItems);
-    console.log(image);
   }
 
   function createItems(amount) {

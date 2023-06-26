@@ -2,12 +2,17 @@ import React from "react";
 import { act } from "react-dom/test-utils";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import ContextProvider from "../ContextProvider";
 import "@testing-library/jest-dom";
 import Shop from "../shop/Shop";
 
 beforeEach(async () => {
   act(() => {
-    render(<Shop />);
+    render(
+      <ContextProvider>
+        <Shop />
+      </ContextProvider>
+    );
   });
 
   const user = userEvent.setup();

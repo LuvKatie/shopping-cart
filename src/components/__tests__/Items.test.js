@@ -4,6 +4,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
+import ContextProvider from "../ContextProvider";
 import { fetchWeapons } from "../shop/Items";
 import ItemContainers from "../shop/ItemContainer";
 
@@ -19,7 +20,9 @@ beforeEach(async () => {
   act(() => {
     render(
       <MemoryRouter>
-        <ItemContainers></ItemContainers>
+        <ContextProvider>
+          <ItemContainers></ItemContainers>
+        </ContextProvider>
       </MemoryRouter>
     );
   });

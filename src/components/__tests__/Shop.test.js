@@ -4,6 +4,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { MemoryRouter } from "react-router-dom";
+import ContextProvider from "../ContextProvider";
 import Shop from "../shop/Shop";
 import RouteSwitch from "../RouteSwitch";
 
@@ -60,7 +61,9 @@ describe("Shop component", () => {
     act(() => {
       render(
         <MemoryRouter>
-          <RouteSwitch />
+          <ContextProvider>
+            <RouteSwitch />
+          </ContextProvider>
         </MemoryRouter>
       );
     });
