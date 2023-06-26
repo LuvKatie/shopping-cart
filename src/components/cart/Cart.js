@@ -21,7 +21,8 @@ const Cart = (props) => {
 
   return (
     <div data-testid="cart-modal" className={`${modalMode()}`} id="cart-modal">
-      {cartItems.map((item) => item)}
+      {/* {cartItems.map((item) => item)} */}
+      {cartItems}
       <button
         aria-label="modal-exit"
         onClick={handleClick}
