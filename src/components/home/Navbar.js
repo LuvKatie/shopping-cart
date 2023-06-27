@@ -1,11 +1,12 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import cart from "../../images/cart.svg";
+import { ShopContext } from "../ContextProvider";
 import "../../styles/navbar.css";
 
 const Navbar = (props) => {
   const { handleClick } = props;
-  const location = useLocation();
+  const { setSelectCategory } = useContext(ShopContext);
 
   return (
     <nav className="z-10 col-start-2 col-end-3 row-start-1 row-end-1 flex items-center justify-center bg-transparent text-center text-white">
@@ -21,9 +22,7 @@ const Navbar = (props) => {
             to={"/shop"}
             className="text-3xl"
             onClick={() => {
-              if (location.pathname === "/shop") {
-                window.location.reload();
-              }
+              setSelectCategory(true);
             }}
           >
             Shop

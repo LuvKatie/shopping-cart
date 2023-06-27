@@ -1,15 +1,16 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 import "../../styles/itemContainers.css";
 import Items from "./Items";
 import PageSwitch from "./PageSwitch";
 import Categories from "./Categories";
+import { ShopContext } from "../ContextProvider";
 export const PageContext = createContext();
 
 const ItemContainers = () => {
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
   const [endPage, setEndPage] = useState(false);
-  const [selectCategory, setSelectCategory] = useState(true);
+  const { selectCategory, setSelectCategory } = useContext(ShopContext);
 
   function layoutChange(component) {
     const itemContainer = document.getElementById("item-container");

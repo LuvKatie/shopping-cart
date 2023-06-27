@@ -29,10 +29,7 @@ input[type=number]::-webkit-outer-spin-button {
     align-items: center;
     position: absolute;
     background-color: rgba(100, 100, 100, 0.3);
-}
-
-#quantity-container {
-    margin-bottom: 100px;
+    gap: 80px;
 }
 
 .add-cart {
@@ -52,6 +49,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 .add-cart:hover {
     background-color: rgb(255, 255, 255, 1);
+}
+
+.amount-btn:hover {
+    background-color: rgb(153, 153, 153);
 }
 
 

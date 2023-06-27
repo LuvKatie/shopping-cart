@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { PageContext } from "./ItemContainer";
 import { ShopContext } from "../ContextProvider";
+import trash from "../../images/trash.svg";
 import "../../styles/items.css";
 
 const Items = (props) => {
@@ -35,13 +36,44 @@ const Items = (props) => {
   }
 
   function addToCart(e) {
+    const itemQuant = e.target.parentNode.querySelector("#item-amount").value;
+    const itemName = e.target.parentNode.parentNode.querySelector("img").id;
     const image = e.target.parentNode.parentNode.querySelector("img").src;
-    console.log(image);
     const newItem = (
-      <div className="H" key={`item-${cartItems.length}`}>
-        HELLO
+      <div
+        className="cart-item"
+        key={`item-${cartItems.length}`}
+        id={`${itemName}`}
+      >
+        <img
+          src={trash}
+          className="cart-delete"
+          aria-label="cart-item-delete"
+          onClick={(e) => {
+            const parent = e.target.closest(".cart-item");
+            parent.remove();
+          }}
+        ></img>
+        <div className="flex h-24 items-center">
+          <img
+            src={image}
+            className="cart-image px-10"
+            aria-label={`${itemName} image`}
+          ></img>
+        </div>
+        {incDecForm(itemQuant)}
       </div>
     );
+
+    const items = document.querySelectorAll(".cart-item");
+
+    for (let i of items) {
+      if (i.id === itemName) {
+        const cartQuant = Number(i.querySelector("#item-amount").value);
+        i.querySelector("#item-amount").value = cartQuant + Number(itemQuant);
+        return;
+      }
+    }
 
     setCartItems((prev) => (prev.length > 0 ? [...prev, newItem] : [newItem]));
   }
@@ -56,12 +88,7 @@ const Items = (props) => {
           onMouseEnter={(e) => handleHover(e)}
           onMouseLeave={(e) => handleHover(e)}
         >
-          <img
-            src=""
-            alt=""
-            id={i}
-            className="h-32 w-9/12 object-contain"
-          ></img>
+          <img src="" id={i} className="h-32 w-9/12 object-contain"></img>
           <div data-testid="item-options" className="item-options hidden">
             <button
               aria-label="add-to-cart"
@@ -70,46 +97,7 @@ const Items = (props) => {
             >
               Add To Cart
             </button>
-            <div id="quantity-container" className="flex items-center">
-              <button
-                aria-label="decrement-amount"
-                className="decrement amount-btn text-xl"
-                onClick={(e) => {
-                  const input =
-                    e.target.parentNode.querySelector("#item-amount");
-                  const value = Number(input.value);
-                  if (value > 0) {
-                    input.value = value - 1;
-                  }
-                }}
-              >
-                -
-              </button>
-              <input
-                type="number"
-                className="quantity h-10 w-16 text-center text-xl"
-                id="item-amount"
-                aria-label="item-amount"
-                name="item-amount"
-                min={0}
-                max={427}
-                defaultValue={0}
-              ></input>
-              <button
-                aria-label="increment-amount"
-                className="increment amount-btn text-xl"
-                onClick={(e) => {
-                  const input =
-                    e.target.parentNode.querySelector("#item-amount");
-                  const value = Number(input.value);
-                  if (value >= 0) {
-                    input.value = value + 1;
-                  }
-                }}
-              >
-                +
-              </button>
-            </div>
+            {incDecForm()}
           </div>
         </div>
       );
@@ -191,6 +179,49 @@ async function getItems(name, page) {
     }
   }
   return skins;
+}
+
+function incDecForm(quant) {
+  return (
+    <div id="quantity-container" className="flex items-center">
+      <button
+        aria-label="decrement-amount"
+        className="decrement amount-btn text-xl"
+        onClick={(e) => {
+          const input = e.target.parentNode.querySelector("#item-amount");
+          const value = Number(input.value);
+          if (value > 1) {
+            input.value = value - 1;
+          }
+        }}
+      >
+        -
+      </button>
+      <input
+        type="number"
+        className="quantity h-10 w-16 text-center text-xl"
+        id="item-amount"
+        aria-label="item-amount"
+        name="item-amount"
+        min={0}
+        max={427}
+        defaultValue={quant || 1}
+      ></input>
+      <button
+        aria-label="increment-amount"
+        className="increment amount-btn text-xl"
+        onClick={(e) => {
+          const input = e.target.parentNode.querySelector("#item-amount");
+          const value = Number(input.value);
+          if (value >= 0) {
+            input.value = value + 1;
+          }
+        }}
+      >
+        +
+      </button>
+    </div>
+  );
 }
 
 function handleHover(e) {

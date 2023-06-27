@@ -20,7 +20,9 @@ describe("Cart component", () => {
 
     render(
       <MemoryRouter>
-        <Navbar handleClick={clickHandler} />
+        <ContextProvider>
+          <Navbar handleClick={clickHandler} />
+        </ContextProvider>
       </MemoryRouter>
     );
 
@@ -85,6 +87,72 @@ describe("Cart component", () => {
       expect(button[0]).toBeInTheDocument();
       expect(modal).toBeInTheDocument();
       expect(modalItems.firstChild).toBeInTheDocument();
+    });
+  });
+
+  it("Cart item has all necessary elements", async () => {
+    const user = userEvent.setup();
+    act(() => {
+      render(
+        <MemoryRouter initialEntries={["/shop"]}>
+          <ContextProvider>
+            <RouteSwitch />
+          </ContextProvider>
+        </MemoryRouter>
+      );
+    });
+    await waitFor(async () => {
+      const category = screen.getByTestId("vandal-category");
+      await user.click(category);
+    });
+    const button = await screen.findAllByText(/add to cart/i);
+    await user.click(button[0]);
+    const cartItem = screen.getByTestId("cart-items").firstChild;
+    const itemImg = screen.getByRole("img", {
+      name: /immortalized vandal image/i,
+    });
+    const cartDelete = screen.getAllByLabelText("cart-item-delete");
+
+    await waitFor(() => {
+      expect(button[0]).toBeInTheDocument();
+      expect(cartItem).toContainElement(itemImg);
+      expect(cartItem).toContainElement(cartDelete[0]);
+    });
+  });
+
+  it("Can delete item from Cart", async () => {
+    const user = userEvent.setup();
+    act(() => {
+      render(
+        <MemoryRouter initialEntries={["/shop"]}>
+          <ContextProvider>
+            <RouteSwitch />
+          </ContextProvider>
+        </MemoryRouter>
+      );
+    });
+    await waitFor(async () => {
+      const category = screen.getByTestId("vandal-category");
+      await user.click(category);
+    });
+    const button = await screen.findAllByText(/add to cart/i);
+    await user.click(button[0]);
+    const cartItem = screen.getByTestId("cart-items").firstChild;
+    const itemImg = screen.getByRole("img", {
+      name: /immortalized vandal image/i,
+    });
+    const cartDelete = screen.getAllByLabelText("cart-item-delete");
+
+    await waitFor(() => {
+      expect(button[0]).toBeInTheDocument();
+      expect(cartItem).toContainElement(itemImg);
+      expect(cartItem).toContainElement(cartDelete[0]);
+    });
+
+    await user.click(cartDelete[0]);
+
+    await waitFor(() => {
+      expect(cartItem).not.toBeInTheDocument();
     });
   });
 });

@@ -4,11 +4,9 @@ import { ShopContext } from "../ContextProvider";
 import "../../styles/cart.css";
 
 const Cart = (props) => {
-  const { cartItems, setCartItems } = useContext(ShopContext);
+  const { cartItems } = useContext(ShopContext);
   const toggleCart = useContext(ToggleCartContext);
   const { handleClick } = props;
-  console.log(setCartItems);
-  console.log(cartItems);
 
   function modalMode() {
     if (toggleCart) {
