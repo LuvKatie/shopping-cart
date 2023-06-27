@@ -13,7 +13,9 @@ describe("Shop component", () => {
     act(() => {
       render(
         <MemoryRouter>
-          <Shop />
+          <ContextProvider>
+            <Shop />
+          </ContextProvider>
         </MemoryRouter>
       );
     });
@@ -29,7 +31,9 @@ describe("Shop component", () => {
     act(() => {
       render(
         <MemoryRouter>
-          <Shop />
+          <ContextProvider>
+            <Shop />
+          </ContextProvider>
         </MemoryRouter>
       );
     });
@@ -43,7 +47,9 @@ describe("Shop component", () => {
     act(() => {
       render(
         <MemoryRouter>
-          <Shop />
+          <ContextProvider>
+            <Shop />
+          </ContextProvider>
         </MemoryRouter>
       );
     });
